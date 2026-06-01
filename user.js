@@ -34,6 +34,13 @@ const Users = [
         name: 'Tanya',
         pic: 'https://i.pinimg.com/736x/77/33/33/773333a3b545f53abde404265047b6aa.jpg',
         bio: 'Boss Lady'
+    },
+       
+
+       {
+        name: 'Yalina',
+        pic: 'https://i.pinimg.com/736x/6d/fc/de/6dfcde554b4ab61d89d1cac6107664ad.jpg',
+        bio: 'Hamzas wife'
       }
 ]
 
