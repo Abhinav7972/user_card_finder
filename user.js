@@ -45,8 +45,8 @@ const Users = [
 ]
 
 
-//vision
 
+//vision
 //showing user
 //filter on input
 //show filterd users
@@ -59,6 +59,22 @@ function showUsers(arr)
     const card = document.createElement("div");
 card.classList.add("card");
 
+//cross button
+        const crossbtn = document.createElement("button");
+        crossbtn.textContent = "X";
+        crossbtn.classList.add("crossbtn");
+        
+        crossbtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const index = Users.indexOf(user);
+            if (index > -1) {
+                Users.splice(index, 1);
+                card_container.innerHTML = "";
+                showUsers(Users);
+            }
+        });
+        
+        
 // Image
         const img = document.createElement("img");
         const avatarSrc = user.pic; 
@@ -90,6 +106,8 @@ content.appendChild(paragraph);
 card.appendChild(img);
 card.appendChild(blurredLayer);
 card.appendChild(content);
+card.appendChild(crossbtn);
+
 
 // Add to body or container
 card_container.appendChild(card);
@@ -112,8 +130,69 @@ input.addEventListener("input", function () {
     card_container.innerHTML = "";
 
     if (newUsers.length === 0) {
-        card_container.textContent = 'no user found';
+        card_container.innerHTML = "<h2 class='no-users'>No users found</h2>";
     } else {
         showUsers(newUsers);
     }
 });
+
+
+
+const adduserbtn = document.querySelector(".add-user-btn");
+const closebtn = document.querySelector("#closebtn");
+const adduserform = document.querySelector(".add-user-form");
+const userform = document.querySelector(".add-user-form form");
+
+const nameInput = document.querySelector("#name");
+const picInput = document.querySelector("#pic");
+const bioInput = document.querySelector("#bio");
+
+adduserbtn.addEventListener("click", function () {
+
+    adduserform.style.display =
+        adduserform.style.display === "block"
+        ? "none"
+        : "block";
+
+});
+
+closebtn.addEventListener("click",function() {
+
+    adduserform.style.display = "none";
+
+});
+
+
+userform.addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    const newUser = {
+        name: nameInput.value,
+        pic: picInput.value,
+        bio: bioInput.value.trim()
+    };
+
+    if (newUser.name && newUser.pic) {
+
+        Users.push(newUser);
+
+        card_container.innerHTML = "";
+
+        showUsers(Users);
+
+        userform.reset();
+
+        adduserform.style.display = "none";
+
+    } else {
+
+        alert("Please fill in the name and picture URL.");
+
+    }
+
+});
+
+
+
+
